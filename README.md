@@ -1,4 +1,4 @@
-# Exploratory Data Analysis and Advanced Analytics — Retail Project
+# Exploratory Data Analysis and Advanced Analytics - Retail Project
 
 ## Overview
 A two-phase SQL analytics project built on top of a retail data warehouse.
@@ -12,40 +12,40 @@ and reporting views.
 Three gold layer tables from a retail data warehouse containing customer,
 product, and sales data.
 
-dim_customers — 18,000 customers across 6 countries
-dim_products — 295 products across 4 categories
-fact_sales — sales transactions covering 4 years of order history
-Total revenue — 29 million
+dim_customers - 18,000 customers across 6 countries
+dim_products - 295 products across 4 categories
+fact_sales - sales transactions covering 4 years of order history
+Total revenue - 29 million
 
-## Phase 1 — Exploratory Data Analysis
+## Phase 1 - Exploratory Data Analysis
 
 ### Six Step Framework
 
-Step 1 — Database Exploration
+Step 1 - Database Exploration
 Queried information schema to understand table structure, column names,
 and data types across the entire database.
 
-Step 2 — Dimension Exploration
+Step 2 - Dimension Exploration
 Used DISTINCT queries on categorical columns like country, category,
 gender, and product line to understand value ranges and cardinality.
 
-Step 3 — Date Boundary Analysis
+Step 3 - Date Boundary Analysis
 Used MIN and MAX on date columns to identify the earliest and latest
 order dates. Calculated 4 years of sales history using DATEDIFF.
 Found oldest customer age at 109 and youngest at 39.
 
-Step 4 — Key Metrics
+Step 4 - Key Metrics
 Calculated top-level business KPIs using aggregate functions.
-- Total revenue — 29 million
-- Total orders — 27,000 unique orders
-- Total quantity sold — 60,000 items
-- Average selling price — 486
-- Total customers — 18,000
-- Total products — 295
+- Total revenue: 29 million
+- Total orders: 27,000 unique orders
+- Total quantity sold: 60,000 items
+- Average selling price: 486
+- Total customers: 18,000
+- Total products: 295
 All metrics combined into a single summary query for one-shot
 business overview.
 
-Step 5 — Magnitude Analysis
+Step 5 - Magnitude Analysis
 Broke every measure by every dimension systematically to find
 distribution insights.
 - Total revenue by category
@@ -53,7 +53,7 @@ distribution insights.
 - Average cost by product line
 - Total quantity sold by country
 
-Step 6 — Ranking Analysis
+Step 6 - Ranking Analysis
 Ranked dimensions by aggregated measures to identify top and
 bottom performers using TOP with ORDER BY and window functions.
 - Top 5 products by revenue
@@ -62,7 +62,7 @@ bottom performers using TOP with ORDER BY and window functions.
 - Worst 3 customers by order count
 
 ### Key EDA Finding
-Bikes generated 69% of total revenue — 28 million out of 29 million.
+Bikes generated 69% of total revenue - 28 million out of 29 million.
 Accessories and clothing combined were under 1 million. This signals
 significant category concentration risk for the business.
 
@@ -96,42 +96,42 @@ increasing, or decreasing.
 Calculated each category percentage contribution to total revenue
 using windowed SUM with no partition to get overall total then
 dividing and rounding to two decimals.
-Bikes — 69 percent
-Components — 20 percent
-Accessories — 6 percent
-Clothing — 2 percent
+Bikes: 69 percent
+Components: 20 percent
+Accessories: 6 percent
+Clothing: 2 percent
 
 5. Customer Segmentation
 Grouped customers into three segments based on two measures.
-Lifespan — DATEDIFF between first and last order date in months.
-Total spending — SUM of sales amount per customer.
+Lifespan - DATEDIFF between first and last order date in months.
+Total spending - SUM of sales amount per customer.
 
-VIP — at least 12 months history and over 5,000 in spending — 1,655 customers
-Regular — at least 12 months history and 5,000 or under — 2,000 customers
-New — less than 12 months history — 14,000 customers
+VIP: at least 12 months history and over 5,000 in spending - 1,655 customers
+Regular: at least 12 months history and 5,000 or under - 2,000 customers
+New: less than 12 months history - 14,000 customers
 
 ## Reporting Views
 
 ### report_customers
 Consolidated customer reporting view containing customer details,
 age group segmentation, VIP/Regular/New segmentation, and three KPIs.
-- Recency — months since last purchase
-- Average order value — total sales divided by total orders
-- Average monthly spend — total sales divided by lifespan
+- Recency: months since last purchase
+- Average order value: total sales divided by total orders
+- Average monthly spend: total sales divided by lifespan
 
 ### report_products
 Consolidated product reporting view containing product details,
 performance segmentation (High/Mid/Low), and three KPIs.
-- Recency — months since last sale
-- Average order revenue — total sales divided by total orders
-- Average monthly revenue — total sales divided by product lifespan
+- Recency: months since last sale
+- Average order revenue: total sales divided by total orders
+- Average monthly revenue: total sales divided by product lifespan
 
 Both views are consumable directly in Power BI or Tableau without
 any additional data preparation.
 
 ## Repository Structure
-Datasets — source gold layer CSV files
-scripts — SQL scripts organized by analysis type
+Datasets - source gold layer CSV files
+scripts - SQL scripts organized by analysis type
   01_database_exploration.sql
   02_dimensions_exploration.sql
   03_date_exploration.sql
